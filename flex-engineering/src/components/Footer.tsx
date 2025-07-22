@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Button } from "./../components/ui/button";
 import { Input } from "./../components/ui/input";
 import {
@@ -12,9 +13,13 @@ import {
   ArrowRight,
   MessageCircle,
 } from "lucide-react";
+import { useToast } from "./../components/ui/use-toast";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const { toast } = useToast();
+  const [email, setEmail] = useState("");
+  const [isSending, setIsSending] = useState(false);
 
   const services = [
     "Electrical Installation",
@@ -34,6 +39,22 @@ const Footer = () => {
     "Free Quote",
   ];
 
+  const handleSubscribe = async () => {
+    if (!email) return;
+    setIsSending(true);
+
+    // Simulate email send (replace with actual EmailJS or backend call)
+    await new Promise((res) => setTimeout(res, 1000));
+
+    toast({
+      title: "Subscribed!",
+      description: `Thanks! We'll send updates to ${email}.`,
+    });
+
+    setEmail("");
+    setIsSending(false);
+  };
+
   return (
     <footer className="bg-gradient-hero text-primary-foreground">
       <div className="container mx-auto px-4">
@@ -50,10 +71,16 @@ const Footer = () => {
             <div className="flex gap-4">
               <Input
                 type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
                 className="bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/60"
               />
-              <Button variant="cta">
+              <Button
+                variant="cta"
+                onClick={handleSubscribe}
+                disabled={isSending}
+              >
                 <ArrowRight className="h-4 w-4" />
               </Button>
             </div>
@@ -91,7 +118,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center space-x-2">
                 <Mail className="h-4 w-4 text-electric-orange" />
-                <span>flexengineering@gmail.com</span>
+                <span>flexengineering6@gmail.com</span>
               </div>
               <div className="flex items-center space-x-2">
                 <MapPin className="h-4 w-4 text-electric-orange" />
@@ -144,9 +171,14 @@ const Footer = () => {
               <p className="text-sm text-primary-foreground/80 mb-3">
                 Electrical emergencies? We're here to help!
               </p>
-              <Button variant="cta" size="sm" className="w-full">
-                Call Emergency Line
-              </Button>
+              <a href="tel:0786750879">
+                <Button
+                  variant="outline"
+                  className="border-accent-foreground/20 text-accent-foreground hover:bg-accent-foreground/10"
+                >
+                  Call Emergency Line: 0786 750 879
+                </Button>
+              </a>
             </div>
           </div>
         </div>
@@ -154,7 +186,6 @@ const Footer = () => {
         {/* Bottom Footer */}
         <div className="py-8 border-t border-primary-foreground/20">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            {/* Copyright */}
             <div className="text-sm text-primary-foreground/80">
               © {currentYear} Flex Electrical Engineering Systems. All rights
               reserved.
@@ -202,7 +233,6 @@ const Footer = () => {
               </Button>
             </div>
 
-            {/* Legal Links */}
             <div className="flex space-x-4 text-sm">
               <button className="text-primary-foreground/80 hover:text-electric-orange transition-colors">
                 Privacy Policy

@@ -162,12 +162,14 @@ const ServicesSection = () => {
             electricians are available around the clock for urgent repairs and
             safety issues.
           </p>
-          <Button
-            variant="outline"
-            className="border-accent-foreground/20 text-accent-foreground hover:bg-accent-foreground/10"
-          >
-            Call Emergency Line: (555) 123-4567
-          </Button>
+          <a href="tel:0786750879">
+            <Button
+              variant="outline"
+              className="border-accent-foreground/20 text-accent-foreground hover:bg-accent-foreground/10"
+            >
+              Call Emergency Line: 0786 750 879
+            </Button>
+          </a>
         </div>
       </div>
     </section>
