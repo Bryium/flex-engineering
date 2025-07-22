@@ -133,10 +133,12 @@ const Header = () => {
               >
                 Contact
               </button>
-              <Button variant="electric" size="sm" className="w-fit">
-                <Phone className="h-4 w-4" />
-                Call Now
-              </Button>
+              <a href="tel:0786750839" title="Call 0786750839">
+                <Button variant="electric" size="sm" className="w-fit">
+                  <Phone className="h-4 w-4" />
+                  Call Now
+                </Button>
+              </a>
             </nav>
           </div>
         )}
