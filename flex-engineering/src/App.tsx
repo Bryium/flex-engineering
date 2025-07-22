@@ -1,12 +1,24 @@
-function App() {
-  return (
-    <div className="h-screen flex flex-col items-center justify-center bg-blue-100 text-center p-6">
-      <h1 className="text-10xl font-bold text-blue-800">
-        Welcome to Flex Engineering 🚀
-      </h1>
-      <p className="text-lg text-blue-600 mt-4">Tailwind CSS is working!</p>
-    </div>
-  );
-}
+import { Toaster } from "./components/ui/toaster";
+import { Toaster as Sonner } from "./components/ui/sonner";
+import { TooltipProvider } from "./components/ui/tooltip";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Routes, Route } from "react-router-dom";
+import Index from "./pages/index";
+import NotFound from "./pages/NotFound";
+
+const queryClient = new QueryClient();
+
+const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <TooltipProvider>
+      <Toaster />
+      <Sonner />
+      <Routes>
+        <Route path="/" element={<Index />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </TooltipProvider>
+  </QueryClientProvider>
+);
 
 export default App;
