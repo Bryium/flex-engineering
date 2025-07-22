@@ -66,13 +66,13 @@ const ContactSection = () => {
     {
       icon: Phone,
       title: "Phone",
-      details: ["+254 786750839", "+254 715301046"],
+      // details: ["+254 786750839", "+254 715301046"],
       action: "Call Now",
     },
     {
       icon: Mail,
       title: "Email",
-      details: ["flexengineering@gmail.com"],
+      // details: ["flexengineering@gmail.com"],
       action: "Send Email",
     },
     {
@@ -271,14 +271,15 @@ const ContactSection = () => {
                         <h3 className="font-semibold text-foreground mb-2">
                           {info.title}
                         </h3>
-                        {info.details.map((detail, detailIndex) => (
-                          <p
-                            key={detailIndex}
-                            className="text-muted-foreground text-sm mb-1"
-                          >
-                            {detail}
-                          </p>
-                        ))}
+                        {info.details &&
+                          info.details.map((detail, detailIndex) => (
+                            <p
+                              key={detailIndex}
+                              className="text-muted-foreground text-sm mb-1"
+                            >
+                              {detail}
+                            </p>
+                          ))}
                         {info.action && (
                           <Button variant="outline" size="sm" className="mt-2">
                             {info.action}
