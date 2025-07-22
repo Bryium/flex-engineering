@@ -30,6 +30,37 @@ import {
   MessageCircle,
 } from "lucide-react";
 
+const contactInfo = [
+  {
+    icon: Phone,
+    title: "Phone",
+    details: ["+254 786750839", "+254 715301046"],
+    action: "Call Now",
+  },
+  {
+    icon: Mail,
+    title: "Email",
+    details: ["flexengineering@gmail.com"],
+    action: "Send Email",
+  },
+  {
+    icon: MapPin,
+    title: "Address",
+    details: ["River Road Along Wamae Avenue", "Nairobi, Kenya"],
+    action: "Get Directions",
+  },
+  {
+    icon: Clock,
+    title: "Business Hours",
+    details: [
+      "Mon-Fri: 7:00 AM - 6:00 PM",
+      "Sat: 8:00 AM - 4:00 PM",
+      "Sun: Emergency Only",
+    ],
+    action: null,
+  },
+];
+
 const ContactSection = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -61,46 +92,6 @@ const ContactSection = () => {
   const handleInputChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
-
-  const contactInfo = [
-    {
-      icon: Phone,
-      title: "Phone",
-      // details: ["+254 786750839", "+254 715301046"],
-      action: "Call Now",
-    },
-    {
-      icon: Mail,
-      title: "Email",
-      // details: ["flexengineering@gmail.com"],
-      action: "Send Email",
-    },
-    {
-      icon: MapPin,
-      title: "Address",
-      details: ["River Road Along Wamae Avenue", "Nairobi, Kenya"],
-      action: "Get Directions",
-    },
-    {
-      icon: Clock,
-      title: "Business Hours",
-      details: [
-        "Mon-Fri: 7:00 AM - 6:00 PM",
-        "Sat: 8:00 AM - 4:00 PM",
-        "Sun: Emergency Only",
-      ],
-      action: null,
-    },
-  ];
-
-  const serviceAreas = [
-    "Technology City",
-    "Innovation District",
-    "Business Park",
-    "Residential Hills",
-    "Industrial Zone",
-    "Downtown Core",
-  ];
 
   return (
     <section id="contact" className="py-20 bg-background">
@@ -253,61 +244,70 @@ const ContactSection = () => {
             </Card>
           </div>
 
-          {/* Contact Information */}
+          {/* Contact Information & Socials */}
           <div className="space-y-6">
-            {contactInfo.map((info, index) => {
-              const IconComponent = info.icon;
-              return (
-                <Card
-                  key={index}
-                  className="shadow-elegant hover:shadow-blue transition-all duration-300"
-                >
-                  <CardContent className="p-6">
-                    <div className="flex items-start space-x-4">
-                      <div className="w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center flex-shrink-0">
-                        <IconComponent className="h-6 w-6 text-primary-foreground" />
-                      </div>
-                      <div className="flex-1">
-                        <h3 className="font-semibold text-foreground mb-2">
-                          {info.title}
-                        </h3>
-                        {info.details &&
-                          info.details.map((detail, detailIndex) => (
-                            <p
-                              key={detailIndex}
-                              className="text-muted-foreground text-sm mb-1"
-                            >
-                              {detail}
-                            </p>
-                          ))}
-                        {info.action && (
-                          <Button variant="outline" size="sm" className="mt-2">
-                            {info.action}
-                          </Button>
-                        )}
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              );
-            })}
-
-            {/* Service Areas */}
+            {/* Contact Info */}
             <Card className="shadow-elegant">
-              <CardContent className="p-6">
-                <h3 className="font-semibold text-foreground mb-4">
-                  Service Areas
-                </h3>
-                <div className="grid grid-cols-2 gap-2">
-                  {serviceAreas.map((area, index) => (
-                    <div key={index} className="text-sm text-muted-foreground">
-                      • {area}
+              <CardContent className="space-y-4 p-6">
+                {contactInfo.map((item, index) => (
+                  <div key={index} className="space-y-2">
+                    <div className="flex items-center space-x-2">
+                      <item.icon className="h-5 w-5 text-primary" />
+                      <h4 className="font-semibold">{item.title}</h4>
                     </div>
-                  ))}
-                </div>
-                <Button variant="outline" size="sm" className="w-full mt-4">
-                  View Full Service Area
-                </Button>
+
+                    {item.title === "Phone" &&
+                      item.details?.map((number, i) => (
+                        <a
+                          key={i}
+                          href={`tel:${number.replace(/\s+/g, "")}`}
+                          className="text-blue-600 underline block"
+                        >
+                          {item.action} - {number}
+                        </a>
+                      ))}
+
+                    {item.title === "Email" &&
+                      item.details?.map((email, i) => (
+                        <a
+                          key={i}
+                          href={`mailto:${email}`}
+                          className="text-blue-600 underline block"
+                        >
+                          {item.action} - {email}
+                        </a>
+                      ))}
+
+                    {item.title === "Address" &&
+                      item.details?.map((line, i) => {
+                        const fullAddress = item.details?.join(", ");
+                        return i === 0 ? (
+                          <a
+                            key={i}
+                            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                              fullAddress || ""
+                            )}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-blue-600 underline block"
+                          >
+                            {item.action} - {line}
+                          </a>
+                        ) : (
+                          <p key={i} className="text-muted-foreground">
+                            {line}
+                          </p>
+                        );
+                      })}
+
+                    {item.title === "Business Hours" &&
+                      item.details?.map((time, i) => (
+                        <p key={i} className="text-muted-foreground">
+                          {time}
+                        </p>
+                      ))}
+                  </div>
+                ))}
               </CardContent>
             </Card>
 
