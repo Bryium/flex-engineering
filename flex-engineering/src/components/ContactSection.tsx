@@ -29,6 +29,7 @@ import {
   Linkedin,
   MessageCircle,
 } from "lucide-react";
+import emailjs from "emailjs-com";
 
 const contactInfo = [
   {
@@ -40,7 +41,7 @@ const contactInfo = [
   {
     icon: Mail,
     title: "Email",
-    details: ["flexengineering@gmail.com"],
+    details: ["felixmonyoro38@gmail.com"],
     action: "Send Email",
   },
   {
@@ -76,6 +77,25 @@ const ContactSection = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
+    const templateParams = {
+      from_name: formData.name,
+      from_email: formData.email,
+      phone: formData.phone,
+      service: formData.service,
+      message: formData.message,
+    };
+
+    try {
+      await emailjs.send(
+        "service_j7x58hl",
+        "template_66fvfy8",
+        templateParams,
+        "-Ceo0TeMS9BuLUU67"
+      );
+    } catch (error) {
+      console.error("EmailJS Error:", error);
+    }
+
     // Simulate form submission
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
@@ -96,7 +116,6 @@ const ContactSection = () => {
   return (
     <section id="contact" className="py-20 bg-background">
       <div className="container mx-auto px-4">
-        {/* Section Header */}
         <div className="text-center mb-16">
           <span className="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
             Get In Touch
@@ -112,7 +131,6 @@ const ContactSection = () => {
         </div>
 
         <div className="grid lg:grid-cols-3 gap-12">
-          {/* Contact Form */}
           <div className="lg:col-span-2">
             <Card className="shadow-elegant">
               <CardHeader>
@@ -244,9 +262,7 @@ const ContactSection = () => {
             </Card>
           </div>
 
-          {/* Contact Information & Socials */}
           <div className="space-y-6">
-            {/* Contact Info */}
             <Card className="shadow-elegant">
               <CardContent className="space-y-4 p-6">
                 {contactInfo.map((item, index) => (
@@ -311,7 +327,6 @@ const ContactSection = () => {
               </CardContent>
             </Card>
 
-            {/* Social Media */}
             <Card className="shadow-elegant">
               <CardContent className="p-6">
                 <h3 className="font-semibold text-foreground mb-4">
