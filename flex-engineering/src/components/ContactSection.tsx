@@ -41,7 +41,7 @@ const contactInfo = [
   {
     icon: Mail,
     title: "Email",
-    details: ["felixmonyoro38@gmail.com"],
+    details: ["flexengineering6@gmail.com"],
     action: "Send Email",
   },
   {
