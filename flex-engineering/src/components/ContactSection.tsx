@@ -35,7 +35,7 @@ const contactInfo = [
   {
     icon: Phone,
     title: "Phone",
-    details: ["+254 786750839", "+254 715301046"],
+    details: ["+254 786750839", "+254 720864883"],
     action: "Call Now",
   },
   {
