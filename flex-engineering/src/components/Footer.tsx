@@ -13,6 +13,7 @@ import {
   ArrowRight,
   MessageCircle,
 } from "lucide-react";
+import { SiWhatsapp } from "react-icons/si";
 import { useToast } from "./../components/ui/use-toast";
 
 const Footer = () => {
@@ -114,7 +115,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center space-x-2">
                 <Phone className="h-4 w-4 text-electric-orange" />
-                <span>+254 715301046</span>
+                <span>+254 720864883</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Mail className="h-4 w-4 text-electric-orange" />
@@ -224,12 +225,20 @@ const Footer = () => {
               <Button
                 variant="ghost"
                 size="sm"
-                className="p-2 text-primary-foreground/80 hover:text-electric-orange hover:bg-primary-foreground/10"
-                onClick={() =>
-                  window.open("https://wa.me/254786750839", "_blank")
-                }
+                className="p-2 text-primary-foreground/80 hover:text-green-500 hover:bg-primary-foreground/10"
+                onClick={() => {
+                  const useSecond = window.confirm(
+                    "Do you want to use 254720864883 instead of 254786750839?"
+                  );
+
+                  const phoneNumber = useSecond
+                    ? "254720864883"
+                    : "254786750839";
+                  window.open(`https://wa.me/${phoneNumber}`, "_blank");
+                }}
               >
-                <MessageCircle className="h-4 w-4" />
+                WhatsApp Us
+                <SiWhatsapp className="h-4 w-4 ml-2" />
               </Button>
             </div>
 
