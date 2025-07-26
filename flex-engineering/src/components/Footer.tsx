@@ -176,7 +176,7 @@ const Footer = () => {
                   variant="outline"
                   className="border-accent-foreground/20 text-accent-foreground hover:bg-accent-foreground/10"
                 >
-                  Call Emergency Line: 0786 750 879
+                  Call Emergency Line: 0786 750 839
                 </Button>
               </a>
             </div>
