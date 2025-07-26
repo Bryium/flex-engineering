@@ -222,24 +222,35 @@ const Footer = () => {
               >
                 <Linkedin className="h-4 w-4" />
               </Button>
-              <Button
-                variant="ghost"
-                size="sm"
-                className="p-2 text-primary-foreground/80 hover:text-green-500 hover:bg-primary-foreground/10"
-                onClick={() => {
-                  const useSecond = window.confirm(
-                    "Do you want to use 254720864883 instead of 254786750839?"
-                  );
+              <div className="flex flex-col space-y-2">
+                {/* First WhatsApp button */}
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="p-2 text-primary-foreground/80 hover:text-green-500 hover:bg-primary-foreground/10"
+                  onClick={() => {
+                    const phoneNumber = "254786750839";
+                    window.open(`https://wa.me/${phoneNumber}`, "_blank");
+                  }}
+                >
+                  WhatsApp Us (Line 1)
+                  <SiWhatsapp className="h-4 w-4 ml-2" />
+                </Button>
 
-                  const phoneNumber = useSecond
-                    ? "254720864883"
-                    : "254786750839";
-                  window.open(`https://wa.me/${phoneNumber}`, "_blank");
-                }}
-              >
-                WhatsApp Us
-                <SiWhatsapp className="h-4 w-4 ml-2" />
-              </Button>
+                {/* Second WhatsApp button */}
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="p-2 text-primary-foreground/80 hover:text-green-500 hover:bg-primary-foreground/10"
+                  onClick={() => {
+                    const phoneNumber = "254720864883";
+                    window.open(`https://wa.me/${phoneNumber}`, "_blank");
+                  }}
+                >
+                  WhatsApp Us (Line 2)
+                  <SiWhatsapp className="h-4 w-4 ml-2" />
+                </Button>
+              </div>
             </div>
 
             <div className="flex space-x-4 text-sm">
